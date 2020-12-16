@@ -15,6 +15,13 @@ module.exports.initialize = (queue) => {
 module.exports.router = (req, res, next = ()=>{}) => {
   console.log('Serving request type ' + req.method + ' for url ' + req.url);
   res.writeHead(200, headers);
-  res.end();
-  next(); // invoke next() at the end of a request to help with testing!
-};
+  if (req.method === 'GET') {
+    let commands = ['up', 'down', 'left', 'right'];
+    let randomNum = Math.floor(Math.random() * (4));
+    res.end(commands[randomNum]);
+  }else {
+    res.end();
+  };
+
+  next();// invoke next() at the end of a request to help with testing!
+}
