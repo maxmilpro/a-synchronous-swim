@@ -5,6 +5,22 @@
   //
   // TODO: build the swim command fetcher here
   //
+  const ajaxFetcher = () => {
+    $.ajax({
+      type: 'GET',
+      url: serverUrl,
+      success: (data) => {
+        console.log('----------> OUR DATA: '+ data);
+        // SwimTeam.move(data);
+        setTimeout(ajaxFetcher, 5000);
+      },
+      error: () => {
+        console.log('Failed to fetch a swim command');
+      }
+    });
+  }
+  console.log('hello world')
+  ajaxFetcher();
 
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!
@@ -45,5 +61,8 @@
 
     ajaxFileUplaod(file);
   });
-
+//   $( document ).load(function() {
+//     console.log( "ready!" );
+//     ajaxFetcher();
+// });
 })();
