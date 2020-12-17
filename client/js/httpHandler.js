@@ -10,8 +10,7 @@
       type: 'GET',
       url: serverUrl,
       success: (data) => {
-        console.log('----------> OUR DATA: '+ data);
-        // SwimTeam.move(data);
+        SwimTeam.move(data);
         setTimeout(ajaxFetcher, 5000);
       },
       error: () => {
@@ -19,7 +18,6 @@
       }
     });
   }
-  console.log('hello world')
   ajaxFetcher();
 
   /////////////////////////////////////////////////////////////////////
@@ -61,8 +59,5 @@
 
     ajaxFileUplaod(file);
   });
-//   $( document ).load(function() {
-//     console.log( "ready!" );
-//     ajaxFetcher();
-// });
+
 })();
