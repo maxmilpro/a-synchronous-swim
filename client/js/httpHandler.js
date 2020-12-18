@@ -5,20 +5,32 @@
   //
   // TODO: build the swim command fetcher here
   //
-  const ajaxFetcher = () => {
+  const ajaxFetcher = (url, successCb, errorCb) => {
     $.ajax({
       type: 'GET',
-      url: serverUrl,
-      success: (data) => {
-        SwimTeam.move(data);
-        setTimeout(ajaxFetcher, 5000);
-      },
-      error: () => {
-        console.log('Failed to fetch a swim command');
-      }
+      url: url,
+      success: successCb,
+      error: errorCb
     });
-  }
-  ajaxFetcher();
+  };
+
+  var swimError = () => {
+    console.log('Failed to fetch a swim command');
+  };
+
+  var swimSuccess = (data) => {
+    SwimTeam.move(data);
+    setTimeout(ajaxFetcher.bind(null, serverUrl, swimSuccess, swimError), 5000);
+  };
+
+  ajaxFetcher(serverUrl, swimSuccess, swimError);
+
+
+  ajaxFetcher(serverUrl + '/image', (data) => {
+    // data should be an image path file
+    console.log('-------> image url:  '+data)
+  }, () => {console.log('Failed to fetch an image');} );
+
 
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!

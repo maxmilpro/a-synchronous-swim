@@ -14,16 +14,20 @@ module.exports.initialize = (queue) => {
 
 module.exports.router = (req, res, next = ()=>{}) => {
   console.log('Serving request type ' + req.method + ' for url ' + req.url);
-  res.writeHead(200, headers);
-  if (req.method === 'GET') {
+  if (req.method === 'GET' && req.url === '/') {
+    res.writeHead(200, headers);
     res.end(messageQueue.dequeue());
-    // let commands = ['up', 'down', 'left', 'right'];
-    // let randomNum = Math.floor(Math.random() * (4));
-    // res.end(commands[randomNum]);
-
+  } else if (req.method === 'GET' && req.url === '/image') {
+    if (fs.existsSync(module.exports.backgroundImageFile)) {
+      res.writeHead(200, headers);
+      res.end(module.exports.backgroundImageFile);
+    } else {
+      res.writeHead(404, headers);
+      res.end();
+    }
   } else {
+    res.writeHead(200, headers);
     res.end();
-  };
-
+  }
   next();// invoke next() at the end of a request to help with testing!
 }
