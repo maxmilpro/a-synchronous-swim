@@ -52,6 +52,7 @@ module.exports.initialize = (callback) => {
         messageQueue.enqueue(message);
         message = ''; // clear the buffer where we are collecting keystrokes
       }
+
     } else {
       // collect the individual characters/keystrokes
       message += (mappedChars[key.name] || key.name);
