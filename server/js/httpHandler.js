@@ -39,6 +39,12 @@ module.exports.router = (req, res, next = ()=>{}) => {
       next();
       }
     })
+  } else if (req.method === 'POST' && req.url === '/') {
+    fs.writeFile(module.exports.backgroundImageFile, req._postData, function() {
+      res.writeHead(201, headers);
+      res.end();
+      next();
+    });
   } else if (req.method === 'OPTIONS') {
     res.writeHead(200, headers);
     res.end();
