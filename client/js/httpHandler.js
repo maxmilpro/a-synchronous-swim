@@ -23,14 +23,18 @@
     setTimeout(ajaxFetcher.bind(null, serverUrl, swimSuccess, swimError), 5000);
   };
 
-  ajaxFetcher(serverUrl, swimSuccess, swimError);
+  // ajaxFetcher(serverUrl, swimSuccess, swimError);
 
+  var imageError = () => {
+    console.log('Failed to fetch an image');
+  };
 
-  ajaxFetcher(serverUrl + '/image', (data) => {
-    // data should be an image path file
-    console.log('-------> image url:  '+data)
-  }, () => {console.log('Failed to fetch an image');} );
+  var imageSuccess = (data) => {
+    $(".pool").addClass("background");
+    console.log("data:   "+ data)
+  };
 
+  ajaxFetcher(serverUrl, imageSuccess, imageError, {image: 'image'} );
 
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!
