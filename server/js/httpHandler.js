@@ -17,17 +17,31 @@ module.exports.router = (req, res, next = ()=>{}) => {
   if (req.method === 'GET' && req.url === '/') {
     res.writeHead(200, headers);
     res.end(messageQueue.dequeue());
-  } else if (req.method === 'GET' && req.url === '/image') {
-    if (fs.existsSync(module.exports.backgroundImageFile)) {
+    next();
+  } else if (req.method === 'GET' && req.url === '/js/background.jpg') {
+    // if (fs.existsSync(module.exports.backgroundImageFile)) {
+    //   fs.readFile()
+    //   res.writeHead(200, headers);
+    //   res.end(module.exports.backgroundImageFile);
+    // } else {
+    //   res.writeHead(404, headers);
+    //   res.end();
+    // }
+    fs.readFile(module.exports.backgroundImageFile, function(err, data) {
+      if (err) {
+        res.writeHead(404, headers);
+        res.end();
+        next();
+      } else {
       res.writeHead(200, headers);
-      res.end(module.exports.backgroundImageFile);
-    } else {
-      res.writeHead(404, headers);
+      res.write(data);
       res.end();
-    }
-  } else {
+      next();
+      }
+    })
+  } else if (req.method === 'OPTIONS') {
     res.writeHead(200, headers);
     res.end();
+    next();
   }
-  next();// invoke next() at the end of a request to help with testing!
 }
