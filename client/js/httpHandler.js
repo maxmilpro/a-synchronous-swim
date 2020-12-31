@@ -33,10 +33,11 @@
   const ajaxFileUplaod = (file) => {
     var formData = new FormData();
     formData.append('file', file);
+    console.log(formData);
     $.ajax({
       type: 'POST',
       data: formData,
-      url: 'FILL_ME_IN',
+      url: serverUrl,
       cache: false,
       contentType: false,
       processData: false,
