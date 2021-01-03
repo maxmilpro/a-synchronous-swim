@@ -49,7 +49,6 @@ var response = function() {
     this._ended = true;
     if (data) {
       this._data = Buffer.concat([this._data, Buffer.from(data)]);
-      console.log('-------> OUR DATA: ' + this._data);
     }
   };
 };

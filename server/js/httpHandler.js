@@ -40,7 +40,6 @@ module.exports.router = (req, res, next = ()=>{}) => {
       }
     })
   } else if (req.method === 'POST' && req.url === '/') {
-    console.log('our request post data' + req._postData)
     fs.writeFile(module.exports.backgroundImageFile, multipart.getFile(req._postData), function() {
       res.writeHead(201, headers);
       res.end();
