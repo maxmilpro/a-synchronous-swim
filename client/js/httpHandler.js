@@ -23,7 +23,7 @@
     setTimeout(ajaxFetcher.bind(null, serverUrl, swimSuccess, swimError), 5000);
   };
 
-  ajaxFetcher(serverUrl, swimSuccess, swimError);
+  //ajaxFetcher(serverUrl, swimSuccess, swimError);
 
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!
@@ -36,7 +36,7 @@
     $.ajax({
       type: 'POST',
       data: formData,
-      url: serverUrl,
+      url: serverUrl + '/js/background.jpg',
       cache: false,
       contentType: false,
       processData: false,
